@@ -86,6 +86,13 @@ database.ref().on("value", function(snapshot) {
              snapshot.val().players.player2.choice != undefined) {
               var playerOneChoice = snapshot.val().players.player1.choice;
               var playerTwoChoice = snapshot.val().players.player2.choice;
+              var playerOneWins = snapshot.val().players.player1.wins;
+              var playerOneLosses = snapshot.val().players.player1.losses;
+              var playerTwoWins = snapshot.val().players.player2.wins;
+              var playerTwoLosses = snapshot.val().players.player2.losses;
+
+              database.ref().child("players").child("player1").child("choice").remove();
+              database.ref().child("players").child("player2").child("choice").remove();
 
               if (playerOneChoice === playerTwoChoice) {
                 // DRAW
@@ -94,11 +101,32 @@ database.ref().on("value", function(snapshot) {
                          (playerOneChoice === "paper" && playerTwoChoice === "scissors") ||
                          (playerOneChoice === "scissors" && playerTwoChoice === "rock")) {
                            // PLAYER TWO WINS
+                           playerTwoWins++;
+                           playerOneLosses++;
                            $("#message-bar").html("Player 2 (" + snapshot.val().players.player2.name + ") wins! " + playerTwoChoice + " beats " + playerOneChoice);
+                           database.ref().child("players").child("player2").update({
+                             wins: playerTwoWins
+                           });
+                           database.ref().child("players").child("player1").update({
+                             losses: playerOneLosses
+                           });
               } else {
                 // PLAYER ONE WINS
+                playerOneWins++;
+                playerTwoLosses++;
                 $("#message-bar").html("Player 1 (" + snapshot.val().players.player1.name + ") wins! " + playerOneChoice + " beats " + playerTwoChoice);
+                database.ref().child("players").child("player1").update({
+                  wins: playerOneWins
+                });
+                database.ref().child("players").child("player2").update({
+                  losses: playerTwoLosses
+                });
               }
+
+              $("#player-one-wins").html(playerOneWins);
+              $("#player-two-wins").html(playerTwoWins);
+              $("#player-one-losses").html(playerOneLosses);
+              $("#player-two-losses").html(playerTwoLosses);
 
               if (currentPlayer === PLAYER_ONE) {
                 var item = createResultHand(playerTwoChoice);
@@ -115,27 +143,21 @@ database.ref().on("value", function(snapshot) {
               }
 
               turn++;
+
+              setTimeout(function() {
+                playerOneName = snapshot.val().players.player1.name;
+                playerTwoName = snapshot.val().players.player2.name;
+                readyToPlay(playerOneName, playerTwoName);
+              }, 5000);
   } else if (snapshot.val().players.player1 != undefined &&
              snapshot.val().players.player2 != undefined) {
                // both players are signed in
                // player 1 section: display RPS
                // player 2 section: display RPS
                // message: just names
-               $(".wins-losses").removeClass("hidden");
-               $("#chat-box").removeClass("hidden");
                playerOneName = snapshot.val().players.player1.name;
                playerTwoName = snapshot.val().players.player2.name;
-               $("#player-one-label").html(snapshot.val().players.player1.name);
-               $("#player-two-label").html(snapshot.val().players.player2.name);
-               if (currentPlayer === PLAYER_ONE) {
-                 $("#player-one-form").addClass("hidden");
-                 $("#player-one-options").removeClass("hidden");
-                 $("#message-bar").html("Choose Paper, Rock or Scissors");
-               } else if (currentPlayer === PLAYER_TWO) {
-                 $("#player-two-form").addClass("hidden");
-                 $("#player-two-options").removeClass("hidden");
-                 $("#message-bar").html("Choose Paper, Rock or Scissors");
-               }
+               readyToPlay(playerOneName, playerTwoName);
   }
 
 });
@@ -151,6 +173,24 @@ database.ref().child("chat").on("child_added", function(snapshot) {
     addChatEntry(player, playerTwoName, message, timestamp);
   }
 });
+
+function readyToPlay(playerOneName, playerTwoName) {
+  $(".wins-losses").removeClass("hidden");
+  $("#chat-box").removeClass("hidden");
+  $("#player-one-choice").addClass("hidden");
+  $("#player-two-choice").addClass("hidden");
+  $("#player-one-label").html(playerOneName);
+  $("#player-two-label").html(playerTwoName);
+  if (currentPlayer === PLAYER_ONE) {
+    $("#player-one-form").addClass("hidden");
+    $("#player-one-options").removeClass("hidden");
+    $("#message-bar").html("Choose Rock, Paper or Scissors");
+  } else if (currentPlayer === PLAYER_TWO) {
+    $("#player-two-form").addClass("hidden");
+    $("#player-two-options").removeClass("hidden");
+    $("#message-bar").html("Choose Rock, Paper or Scissors");
+  }
+}
 
 /**
  * Player two enters a name and clicks the Start button

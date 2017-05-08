@@ -34,7 +34,7 @@
 
 /* FORM */
 #middle-section {
-  margin-bottom: 20px;
+  margin-bottom: 45px;
 }
 
 .rps-option {
@@ -50,6 +50,10 @@
 
 .rps-choice {
   font-size: 85pt;
+}
+
+#message-bar {
+  font-size: 16pt;
 }
 
 /* CHAT */
