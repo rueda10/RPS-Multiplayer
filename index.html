@@ -12,67 +12,148 @@
 <body>
   <div class="container">
     <div class="jumbotron">
-      <h1><i class="fa fa-hand-rock-o" aria-hidden="true"></i> <i class="fa fa-hand-paper-o" aria-hidden="true"></i> <i class="fa fa-hand-scissors-o" aria-hidden="true"></i></h1>
+      <!-- <h1><i class="fa fa-hand-rock-o" aria-hidden="true"></i> <i class="fa fa-hand-paper-o" aria-hidden="true"></i> <i class="fa fa-hand-scissors-o" aria-hidden="true"></i></h1> -->
+      <h1>rock, paper, scissors</h1>
     </div>
 
-    <div id="form">
-      <form class="form-inline">
-        <div class="form-group">
-          <label for="playerName">Name</label>
-          <input type="text" class="form-control" id="playerName" placeholder="Enter your name">
+    <!-- ///////////// PLAYER NAME / LABEL //////////// -->
+    <div class="row" id="label-rows">
+      <div class="col-xs-12 col-sm-1"></div>
+      <div class="col-xs-12 col-sm-5">
+
+      </div>
+      <div class="col-xs-12 col-sm-5">
+
+      </div>
+      <div class="col-xs-12 col-sm-1"></div>
+    </div>
+    <!-- ///////////////////////////////////////////// -->
+
+    <div class="row" id="middle-section">
+        <div class="col-xs-12 col-sm-1"></div>
+        <!-- /////////// PLAYER ONE SECTION ////////////-->
+        <div class="col-xs-12 col-sm-5">
+
+          <div class="row">
+            <div class="player-label" id="player-one-label">
+              Player 1
+            </div>
+          </div>
+
+          <div class="hidden row wins-losses">
+            <div>Wins: <span id="player-one-wins"></span></div>
+            <div>Losses: <span id="player-one-losses"></span></div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-xs-12" id="player-one-form">
+              <form class="form-inline">
+                <div class="form-group">
+                  <label for="player-one-name">Name</label>
+                  <input type="text" class="form-control" id="player-one-name" placeholder="Enter your name">
+                </div>
+                <button type="submit" class="btn btn-default" id="player-one-button">Start</button>
+              </form>
+            </div>
+
+            <div class="col-xs-12 hidden" id="player-one-options">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4 rps-option">
+                  <i class="fa fa-hand-rock-o" hand="rock" player="one" aria-hidden="true"></i>
+                </div>
+                <div class="col-xs-12 col-sm-4 rps-option">
+                  <i class="fa fa-hand-paper-o" hand="paper" player="one" aria-hidden="true"></i>
+                </div>
+                <div class="col-xs-12 col-sm-4 rps-option">
+                  <i class="fa fa-hand-scissors-o" hand="scissors" player="one" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 rps-choice hidden" id="player-one-choice">
+
+            </div>
+
+          </div>
+
         </div>
-        <button type="submit" class="btn btn-default">Start</button>
-      </form>
+        <!-- //////// END PLAYER ONE SECTION ///////////-->
+
+        <!-- ///////// PLAYER TWO SECTION /////////// -->
+        <div class="col-xs-12 col-sm-5">
+
+          <div class="row">
+            <div class="player-label" id="player-two-label">
+              Player 2
+            </div>
+          </div>
+
+          <div class="hidden row wins-losses">
+            <div>Wins: <span id="player-two-wins"></span></div>
+            <div>Losses: <span id="player-two-losses"></span></div>
+          </div>
+
+          <div class="row">
+
+            <div class="col-xs-12" id="player-two-form">
+              <form class="form-inline">
+                <div class="form-group">
+                  <label for="player-one-name">Name</label>
+                  <input type="text" class="form-control" id="player-two-name" placeholder="Enter your name">
+                </div>
+                <button type="submit" class="btn btn-default" id="player-two-button">Start</button>
+              </form>
+            </div>
+
+            <div class="col-xs-12 hidden" id="player-two-options">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4 rps-option">
+                  <i class="fa fa-hand-rock-o" hand="rock" player="two" aria-hidden="true"></i>
+                </div>
+                <div class="col-xs-12 col-sm-4 rps-option">
+                  <i class="fa fa-hand-paper-o" hand="paper" player="two" aria-hidden="true"></i>
+                </div>
+                <div class="col-xs-12 col-sm-4 rps-option">
+                  <i class="fa fa-hand-scissors-o" hand="scissors" player="two" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 rps-choice hidden" id="player-two-choice">
+
+            </div>
+
+          </div>
+
+        </div>
+        <!-- /////// END PLAYER TWO SECTION //////// -->
+        <div class="col-xs-12 col-sm-1"></div>
     </div>
 
-    <div class="row">
-      <div class="col-xs-12 col-sm-4 game-div">
-        <div class="outer">
-          <div class="middle">
-            <div class="inner" id="player-1-div">
-              Waiting for player 1...
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-4 game-div">
-        <div class="outer">
-          <div class="middle">
-            <div class="inner">
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-4 game-div">
-        <div class="outer">
-          <div class="middle">
-            <div class="inner" id="player-2-div">
-              Waiting for player 2...
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="row" id="message-bar">
+      Message goes here
     </div>
 
-    <div class="row" id="chat-box">
-      <div class="col-xs-12 col-sm-3">
+    <div class="row hidden" id="chat-box">
+      <div class="col-xs-12 col-sm-2">
 
       </div>
-      <div class="col-xs-12 col-sm-6">
+      <div class="col-xs-12 col-sm-8">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <span class="glyphicon glyphicon-comment"></span> Chat
           </div>
           <div class="panel-body">
             <ul class="chat">
-              <li class="left clearfix">
+              <!-- <li class="left clearfix">
                 <span class="chat-img pull-left">
                   <img src="http://placehold.it/50/55C1E7/fff&text=P1" alt="User Avatar" class="img-circle" />
                 </span>
                 <div class="chat-body clearfix">
                   <div class="header">
                     <strong class="primary-font">Player 1</strong>
+                    <small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>12 mins ago</small>
                   </div>
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
@@ -86,7 +167,7 @@
                 </span>
                 <div class="chat-body clearfix">
                   <div class="header">
-                    <span class="placeholder">a</span>
+                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
                     <strong class="pull-right primary-font">Player 2</strong>
                   </div>
                   <p>
@@ -94,36 +175,8 @@
                     dolor, quis ullamcorper ligula sodales.
                   </p>
                 </div>
-              </li>
-              <li class="left clearfix">
-                <span class="chat-img pull-left">
-                  <img src="http://placehold.it/50/55C1E7/fff&text=P1" alt="User Avatar" class="img-circle" />
-                </span>
-                <div class="chat-body clearfix">
-                  <div class="header">
-                    <strong class="primary-font">Player 1</strong>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                    dolor, quis ullamcorper ligula sodales.
-                  </p>
-                </div>
-              </li>
-              <li class="right clearfix">
-                <span class="chat-img pull-right">
-                  <img src="http://placehold.it/50/FA6F57/fff&text=P2" alt="User Avatar" class="img-circle" />
-                </span>
-                <div class="chat-body clearfix">
-                  <div class="header">
-                    <span class="placeholder">a</span>
-                    <strong class="pull-right primary-font">Player 2</strong>
-                  </div>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
-                    dolor, quis ullamcorper ligula sodales.
-                  </p>
-                </div>
-              </li>
+              </li> -->
+
             </ul>
           </div>
           <div class="panel-footer">
@@ -137,7 +190,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-3">
+    <div class="col-xs-12 col-sm-2">
 
     </div>
   </div>

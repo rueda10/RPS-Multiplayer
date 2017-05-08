@@ -1,36 +1,55 @@
+@font-face {
+    font-family: whoa;
+    src: url("../fonts/whoa!.ttf") format("truetype");
+}
+
 /* JUMBOTRON */
 .container {
   text-align: center;
 }
 
 .jumbotron {
+  font-family: whoa;
+  color: black;
   padding: 10px;
   margin: 20px 0px;
 }
 
-/* FORM */
-#form {
+.jumbotron h1 {
+  font-size: 62pt;
+}
+
+/* LABELS */
+#label-rows {
+  margin-top: 40px;
+}
+
+.wins-losses {
   margin-bottom: 20px;
 }
 
-/* MIDDLE CONTENT */
-.outer {
-  height: 200px;
-  width: 100%;
-  overflow: hidden;
-  display: table;
-  position: static;
+.player-label {
+  font-size: 30pt;
 }
 
-.middle[class] {
-  display: table-cell;
-  vertical-align: middle;
-  position: static;
+/* FORM */
+#middle-section {
+  margin-bottom: 20px;
 }
 
-.game-div {
-  border: thin solid black;
-  text-align: center;
+.rps-option {
+  font-size: 60pt;
+  cursor: pointer;
+}
+
+.rps-option i:hover {
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+}
+
+.rps-choice {
+  font-size: 85pt;
 }
 
 /* CHAT */
@@ -91,4 +110,8 @@
 /* OTHER */
 .placeholder {
   opacity: 0;
+}
+
+.hidden {
+  display: none;
 }
