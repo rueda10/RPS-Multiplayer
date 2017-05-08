@@ -75,7 +75,7 @@ database.ref().on("value", function(snapshot) {
                }
   } else if (snapshot.val().players.player2.choice != undefined &&
              snapshot.val().players.player1.choice === undefined) {
-               var playerOneChoice = snapshot.val().players.player2.choice;
+               var playerTwoChoice = snapshot.val().players.player2.choice;
 
                if (currentPlayer === PLAYER_TWO) {
                  $("#message-bar").html("You chose " + playerTwoChoice + ". Waiting on Player 1");
@@ -103,24 +103,24 @@ database.ref().on("value", function(snapshot) {
                            // PLAYER TWO WINS
                            playerTwoWins++;
                            playerOneLosses++;
-                           $("#message-bar").html("Player 2 (" + snapshot.val().players.player2.name + ") wins! " + playerTwoChoice + " beats " + playerOneChoice);
                            database.ref().child("players").child("player2").update({
                              wins: playerTwoWins
                            });
                            database.ref().child("players").child("player1").update({
                              losses: playerOneLosses
                            });
+                           $("#message-bar").html("Player 2 (" + snapshot.val().players.player2.name + ") wins! " + playerTwoChoice + " beats " + playerOneChoice);
               } else {
                 // PLAYER ONE WINS
                 playerOneWins++;
                 playerTwoLosses++;
-                $("#message-bar").html("Player 1 (" + snapshot.val().players.player1.name + ") wins! " + playerOneChoice + " beats " + playerTwoChoice);
                 database.ref().child("players").child("player1").update({
                   wins: playerOneWins
                 });
                 database.ref().child("players").child("player2").update({
                   losses: playerTwoLosses
                 });
+                $("#message-bar").html("Player 1 (" + snapshot.val().players.player1.name + ") wins! " + playerOneChoice + " beats " + playerTwoChoice);
               }
 
               $("#player-one-wins").html(playerOneWins);
